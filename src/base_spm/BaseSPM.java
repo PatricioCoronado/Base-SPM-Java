@@ -835,9 +835,13 @@ public class BaseSPM  extends JFrame//Clase principal con función main
 		//Filtramos para no rebasar máximos no mínimos
 		if (base.frecuencia<Global.FRECUENCIA_MINIMA) base.frecuencia=Global.FRECUENCIA_MINIMA;
 		if (base.frecuencia>Global.FRECUENCIA_MAXIMA) base.frecuencia=Global.FRECUENCIA_MAXIMA;
+		scrollFrecuencia.setValue(base.frecuencia);//Actualiza el control scroll de frecuencia en pantalla
+		//
 		//Filtro de "pasos"
 		if (base.pasos>Global.PASOS_MAXIMOS) base.frecuencia=Global.PASOS_MAXIMOS;
 		if (base.pasos<Global.PASOS_MINIMO) base.frecuencia=Global.PASOS_MINIMO;
+		spinnerPasos.setValue(base.pasos);//Actualiza el spinner de pasos
+		//
 		//Confirma que la resolución leida es válida
 		boolean resolucionNoValida=true;//Flag para saber si hay una resolución correcta
 		for(int i = 0;i<Global.RESOLUCION.length;i++)
@@ -849,6 +853,7 @@ public class BaseSPM  extends JFrame//Clase principal con función main
 			}
 		}
 		if(resolucionNoValida) base.resolucion=Global.RESOLUCION[Global.RESOLUCION.length-1];
+		comboResolucion.setSelectedItem(base.resolucion);//Actualiza la resolución en el combo
 		//Filtramos datos acelerómetro y fotodiodo
 		base.datosFotodiodo = (base.datosFotodiodo > Global.DATOS_MAX) ? Global.DATOS_MAX : base.datosFotodiodo;  
 		base.datosFotodiodo = (base.datosFotodiodo < Global.DATOS_MIN) ? Global.DATOS_MIN : base.datosFotodiodo;
@@ -904,7 +909,7 @@ public class BaseSPM  extends JFrame//Clase principal con función main
 			{
 				if (serie.abierto())
 					serie.println("mot:th?");
-				Thread.sleep(2000);
+				Thread.sleep(20000);
 			}
 			return null;
 		}	
